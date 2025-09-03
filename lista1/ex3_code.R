@@ -35,4 +35,10 @@ summary(n2_2)
 
 #
 par(mfrow=c(1,1))
-plot(n1_2~n1_1)
+plot(n1_2~n2_2)
+m2 <- lm(n1_2~n2_2)
+summary(m2)
+anova(m2)
+m2$coefficients #igual às médias dos grupos
+plot(m2)
+
