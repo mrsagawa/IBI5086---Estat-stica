@@ -28,7 +28,7 @@
 
 \section{Exercício 2}
 
-Inicialmente determinei alguns valores arbitrários para simular um dataset para o exercício. Foram adotados $media = 50$ e $desvio padrao = 5$ na função $rnorm()$ do R para gerar o conjunto P1 como pode ser visto no retângulo abaixo. Além disso, foram obtidos os valores básicos do dataset P1 com a função $summary(p1)$ e $sd(p1)$, assim como a verificação de normalidade pelo teste de Shapiro e a visualização de sua distribuição de frequências com seu histograma \ref{fig1}.
+Inicialmente determinei alguns valores arbitrários para simular um dataset para o exercício. Foram adotados $media = 50$ e $desvio padrao = 5$ na função $rnorm()$ do R para gerar o conjunto P1 como pode ser visto no retângulo abaixo. Além disso, foram obtidos os valores básicos do dataset P1 com a função $summary(p1)$ e $sd(p1)$, assim como a verificação de normalidade pelo teste de Shapiro e a visualização de sua distribuição de frequências com seu histograma (Figura \ref{fig1}).
 
 \begin{lstlisting}
 media <- 50
@@ -127,39 +127,65 @@ set.seed(153)
 # Gerar 4 datasets independentemente
 # rnorm() para garantir distribuição normal em todos os conjuntos
 
-var <- 5
+var <- 20
 
-# Gerar médias aleatórias entre [30,60] para serem as médias dos conjuntos
-medias <- runif(4, min = 30, max = 60) 
+n1_1 <- rnorm(35, mean = 100, sd = var)
+n2_1 <- rnorm(35, mean = 100, sd = var)
+n1_2 <- rnorm(57, mean = 98, sd = var)
+n2_2 <- rnorm(57, mean = 130, sd = var)
 
-n1_1 <- rnorm(35, mean = medias[1], sd = var)
-n2_1 <- rnorm(35, mean = medias[2], sd = var)
-n1_2 <- rnorm(57, mean = medias[3], sd = var)
-n2_2 <- rnorm(57, mean = medias[4], sd = var)
-
-summary(n1_1)
-#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#48.50   56.03   59.43   59.12   61.58   69.00 
-summary(n1_2)
-#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#28.91   34.03   38.27   38.14   41.61   51.07 
-summary(n2_1)
-#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#36.16   41.33   43.63   44.61   48.14   53.12 
-summary(n2_2)
-#Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#28.14   37.39   39.87   40.44   44.01   53.87
+# Plot histogramas
+par(mfrow=c(2,2))
+hist(n1_1)
+hist(n2_1)
+hist(n1_2)
+hist(n2_2)
 
 # Teste de normalidade dos conjuntos
 shapiro.test(n1_1)
-# W = 0.9859, p-value = 0.9242
+# W = 0.97416, p-value = 0.567
 shapiro.test(n1_2)
-# W = 0.97733, p-value = 0.3593
+# W = 0.978, p-value = 0.3834
 shapiro.test(n2_1)
-# W = 0.96533, p-value = 0.3282
+# W = 0.9668, p-value = 0.3617
 shapiro.test(n2_2)
-# W = 0.98261, p-value = 0.5827
-# Todos os datasets são normais --> OK!
+# W = 0.98066, p-value = 0.4922
+
+# Teste de homocedasticidade dos devios padrões
+P1 <- c(n1_1, n1_2)
+P2 <- c(n2_1, n2_2)
+
+grupo_P1 <- factor(rep(c("P1_1","P1_2"), times=c(35,57)))
+grupo_P2 <- factor(rep(c("P2_1","P2_2"), times=c(35,57)))
+
+bartlett.test(P1 ~ grupo_P1)
+# Bartlett's K-squared = 0.015002, df = 1, p-value = 0.9025
+bartlett.test(P2 ~ grupo_P2)
+# Bartlett's K-squared = 0.37342, df = 1, p-value = 0.5411
+
+# Teste t
+t.test(n1_1, n1_2, conf.level = 0.95)  # P1 Ran1 vs Ran2
+# t = 0.77755, df = 73.137, p-value = 0.4393
+# alternative hypothesis: true difference in means is not equal to 0
+# 95 percent confidence interval:
+# -5.566647 12.689231
+# sample estimates:
+# mean of x mean of y 
+# 97.25274  93.69145
+
+t.test(n2_1, n2_2, conf.level = 0.95)  # P2 Ran1 vs Ran2
+# t = -6.3448, df = 77.363, p-value = 1.384e-08
+# alternative hypothesis: true difference in means is not equal to 0
+# 95 percent confidence interval:
+# -34.77608 -18.16298
+# sample estimates:
+# mean of x mean of y 
+# 100.1300  126.5995
+
+# Plots
+par(mfrow=c(1,2))
+boxplot(n1_1, n1_2, main="P1")
+boxplot(n2_1, n2_2, main="P2")
 \end{lstlisting}
 
 \begin{figure}[h]
@@ -167,6 +193,13 @@ shapiro.test(n2_2)
     \includegraphics[width=0.9\textwidth]{figures/ex3.png} % caminho do arquivo
     \caption{Histograma das simulações}
     \label{fig3}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/bp_ex3.png} % caminho do arquivo
+    \caption{Boxplot das simulações}
+    \label{fig4}
 \end{figure}
 
 \section{Exercício 4}

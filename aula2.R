@@ -86,6 +86,7 @@ dat.wide<-dados
 dat.wide
 names(dat.wide)
 
+install.packages("reshape2")
 library(reshape2)
 #Convertendo do formato wide para o long
 dat.long <- melt(dat.wide,id.vars=c("Ran","Fu","Sex","Altura", "Peso", "Ativ"))
@@ -240,6 +241,8 @@ sqrt(sc2)
 
 
 
+P1 <- dados$P1
+P2 <- dados$P2
 ###Modelagem Estatística de Dados
 ##Modelos de Regressão Gerais
 #Ajuste do modelo M1
@@ -272,6 +275,7 @@ shapiro.test(m1$residuals)
 #Ajuste do modelo M2: modelo de regressão com variável preditora dummy
 #Equivalente ao teste "t" com amostras independentes sob homocedasticidade
 #y=b0+b2Ran+e
+install.packages("car")
 library(car)
 Ran<-recode(Ran,"1='1';2='0'") #recodificação das categorias de grupos
 Ran
@@ -280,6 +284,7 @@ plot(P2~Ran)
 points(c(0,1),c(mean(P2[Ran==0]),mean(P2[Ran==1])),col="red",pch=19)
 
 plot(P2~factor(Ran)) #note o impacto de declarar Ran como uma var categórica (um fator)
+factor(Ran)
 points(c(1,2),c(mean(P2[Ran==0]),mean(P2[Ran==1])),col="red",pch=19)
 
 m2<-lm(P2~factor(Ran)) #neste caso é equivalente: m2<-lm(P2~Ran)

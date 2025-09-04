@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.4) (preloaded format=xelatex 2025.6.18)  3 SEP 2025 17:15
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.4) (preloaded format=xelatex 2025.6.18)  4 SEP 2025 14:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -177,20 +177,37 @@ File: figures/ex3.png Graphic file (type bmp)
 <figures/ex3.png>
 
 
-[5] (c:\Users\Guilherme-PC\Documents\Estatistica\lista1\build\lista1.aux)
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: figures/bp_ex3.png Graphic file (type bmp)
+<figures/bp_ex3.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+[5]
+
+[6]
+
+[7] (c:\Users\Guilherme-PC\Documents\Estatistica\lista1\build\lista1.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3424 strings out of 403341
- 49735 string characters out of 5461672
- 839390 words of memory out of 5000000
- 31771 multiletter control sequences out of 15000+600000
+ 3440 strings out of 403341
+ 49995 string characters out of 5461672
+ 953390 words of memory out of 5000000
+ 31786 multiletter control sequences out of 15000+600000
  629633 words of font info for 58 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,6n,65p,996b,1705s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on c:\Users\Guilherme-PC\Documents\Estatistica\lista1\build\list
-a1.pdf (5 pages).
+a1.pdf (7 pages).
